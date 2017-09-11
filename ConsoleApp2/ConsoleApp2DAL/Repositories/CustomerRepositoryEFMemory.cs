@@ -10,9 +10,9 @@ namespace ConsoleApp2DAL.Repositories
 {
     public class CustomerRepositoryEFMemory : ICustomerRepository
     {
-        InMemoryContext context;
+        CustomerAppContext context;
 
-        public CustomerRepositoryEFMemory(InMemoryContext context)
+        public CustomerRepositoryEFMemory(CustomerAppContext context)
         {
             this.context = context;
         }

@@ -9,9 +9,9 @@ namespace ConsoleApp2DAL.Repositories
 {
     public class GenreRepositoryEFMemory : IGenreRepository
     {
-        InMemoryContext context;
+        CustomerAppContext context;
 
-        public GenreRepositoryEFMemory(InMemoryContext context)
+        public GenreRepositoryEFMemory(CustomerAppContext context)
         {
             this.context = context;
         }

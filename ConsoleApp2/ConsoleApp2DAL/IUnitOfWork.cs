@@ -7,6 +7,10 @@ namespace ConsoleApp2DAL
     public interface IUnitOfWork : IDisposable
     {   
         ICustomerRepository CustomerRepository { get; }
+        IOrderRepository OrderRepository { get; }
+
+        //genre??
+
 
         int Complete();
     }

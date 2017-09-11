@@ -6,17 +6,21 @@ using System.Text;
 
 namespace ConsoleApp2DAL.UOW
 {
-    public class UnitOfWorkMem : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         public ICustomerRepository CustomerRepository { get; internal set; }
-        public IGenreRepository GenreRepository { get; internal set; }
-        private InMemoryContext context;
+        //public IGenreRepository GenreRepository { get; internal set; }
 
-        public UnitOfWorkMem()
+        public IOrderRepository OrderRepository { get; internal set; }
+
+        private CustomerAppContext context;
+
+        public UnitOfWork()
         {
-            context = new InMemoryContext();
+            context = new CustomerAppContext();
             CustomerRepository = new CustomerRepositoryEFMemory(context);
-            GenreRepository = new GenreRepositoryEFMemory(context);
+           // GenreRepository = new GenreRepositoryEFMemory(context);
+            OrderRepository = new OrderRepository(context);
 
         }
 

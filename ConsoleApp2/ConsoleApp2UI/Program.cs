@@ -14,7 +14,7 @@ namespace ConsoleApp2UI
             Program prog = new Program();
         }
 
-        Program()
+        Program()//dfsd
         {
             var cust = new CustomerBO()
             {

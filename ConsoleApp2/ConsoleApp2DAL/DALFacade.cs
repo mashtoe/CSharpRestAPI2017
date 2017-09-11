@@ -8,30 +8,11 @@ namespace ConsoleApp2DAL
 {
     public class DALFacade
     {
-        public ICustomerRepository CustomerRepository
-        {
-            //get { return new CustomerRepositoryFakeDB(); }
-            get 
-            {
-                return new CustomerRepositoryEFMemory(new Context.InMemoryContext());
-            }
-
-        }
-
-        public IGenreRepository GenreRepository
-        {
-            get
-            {
-                return new GenreRepositoryEFMemory(new Context.InMemoryContext());
-            }
-
-        }
-
         public IUnitOfWork UnitOfWork
         {
             get
             {
-                return new UnitOfWorkMem();
+                return new UnitOfWork();
             }
 
         }

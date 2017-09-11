@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ConsoleApp2BLL
 {
-    public interface IService
+    public interface ICustomerService
     {
         //C
         CustomerBO Create(CustomerBO cust);
@@ -18,6 +18,6 @@ namespace ConsoleApp2BLL
         //D
         bool DeleteCustomer(int id);
 
-        List<CustomerBO> CreateMultiple(List<CustomerBO> customers);
+        List<CustomerBO> CreateMultiple(List<CustomerBO> customers); 
     }
 }

@@ -7,17 +7,18 @@ using System.Text;
 
 namespace ConsoleApp2DAL.Context
 {
-    public class InMemoryContext : DbContext
+    public class CustomerAppContext : DbContext
     {
-        static DbContextOptions<InMemoryContext> options = 
-            new DbContextOptionsBuilder<InMemoryContext>().UseInMemoryDatabase("TheDB").Options;
+        static DbContextOptions<CustomerAppContext> options = 
+            new DbContextOptionsBuilder<CustomerAppContext>().UseInMemoryDatabase("TheDB").Options;
 
-        public InMemoryContext() : base(options)
+        public CustomerAppContext() : base(options)
         {
 
         }
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Genre> Genre { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

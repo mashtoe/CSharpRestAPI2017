@@ -8,9 +8,14 @@ namespace ConsoleApp2BLL
 {
     public class BLLFacade
     {
-        public IService CustomerService
+        public ICustomerService CustomerService
         {
             get { return new CustomerService(new DALFacade()); }
+        }
+
+        public IOrderService OrderService
+        {
+            get { return new OrderService(new DALFacade()); }
         }
     }
 }

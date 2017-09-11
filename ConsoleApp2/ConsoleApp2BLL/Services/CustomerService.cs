@@ -5,12 +5,14 @@ using ConsoleApp2DAL;
 using System.Linq;
 using ConsoleApp2BLL.BusinessObjects;
 using ConsoleApp2DAL.Entities;
+using ConsoleApp2BLL.Converters;
 
 namespace ConsoleApp2BLL.Services
 {
-    class CustomerService : IService
+    class CustomerService : ICustomerService
     {
         DALFacade facade;
+        CustomerConverter conv = new CustomerConverter();
 
         public CustomerService(DALFacade facade)
         {
@@ -21,9 +23,9 @@ namespace ConsoleApp2BLL.Services
         {
             using (var uow = facade.UnitOfWork)
             {
-                var newCust = uow.CustomerRepository.Create(Convert(cust));
+                var newCust = uow.CustomerRepository.Create(conv.Convert(cust));
                 uow.Complete();
-                return Convert(newCust);
+                return conv.Convert(newCust);
             }
         }
 
@@ -34,8 +36,8 @@ namespace ConsoleApp2BLL.Services
                 List<CustomerBO> retrunListCust = new List<CustomerBO>();
                 for (int i = 0; i < customers.Count; i++)
                 {
-                    var newCust = uow.CustomerRepository.Create(Convert(customers[i]));
-                    retrunListCust.Add(Convert(newCust));
+                    var newCust = uow.CustomerRepository.Create(conv.Convert(customers[i]));
+                    retrunListCust.Add(conv.Convert(newCust));
                 }
                 uow.Complete();
                 return retrunListCust;
@@ -58,7 +60,7 @@ namespace ConsoleApp2BLL.Services
             {
                 //Customer -> CustomerBO
                 //return uow.CustomerRepository.GetAll();
-                return uow.CustomerRepository.GetAll().Select(c => Convert(c)).ToList();
+                return uow.CustomerRepository.GetAll().Select(c => conv.Convert(c)).ToList();
             }
         }
 
@@ -66,7 +68,7 @@ namespace ConsoleApp2BLL.Services
         {
             using (var uow = facade.UnitOfWork)
             {
-                return Convert(uow.CustomerRepository.GetCustomer(id));
+                return conv.Convert(uow.CustomerRepository.GetCustomer(id));
             }
         }
 
@@ -83,31 +85,31 @@ namespace ConsoleApp2BLL.Services
                 customerFromDb.Lastname = cust.Lastname;
                 customerFromDb.Address = cust.Address;
                 uow.Complete();
-                return Convert(customerFromDb);
+                return conv.Convert(customerFromDb);
             }
         }
 
 
-        private Customer Convert(CustomerBO cust)
-        {
-            return new Customer()
-            {
-                Id = cust.Id,
-                Address = cust.Address,
-                Name = cust.Name,
-                Lastname = cust.Lastname
-            };
-        }
+        //private Customer Convert(CustomerBO cust)
+        //{
+        //    return new Customer()
+        //    {
+        //        Id = cust.Id,
+        //        Address = cust.Address,
+        //        Name = cust.Name,
+        //        Lastname = cust.Lastname
+        //    };
+        //}
 
-        private CustomerBO Convert(Customer cust)
-        {
-            return new CustomerBO()
-            {
-                Id = cust.Id,
-                Address = cust.Address,
-                Name = cust.Name,
-                Lastname = cust.Lastname
-            };
-        }
+        //private CustomerBO Convert(Customer cust)
+        //{
+        //    return new CustomerBO()
+        //    {
+        //        Id = cust.Id,
+        //        Address = cust.Address,
+        //        Name = cust.Name,
+        //        Lastname = cust.Lastname
+        //    };
+        //}
     }
 }
