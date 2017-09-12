@@ -55,6 +55,7 @@ namespace ConsoleApp2BLL.Services
             using (var uow = facade.UnitOfWork)
             {
                 var orderEntity = uow.OrderRepository.Get(id);
+                orderEntity.Customer = uow.CustomerRepository.GetCustomer(orderEntity.CustomerId);
                 return conv.Convert(orderEntity);
             }
         }
@@ -70,7 +71,9 @@ namespace ConsoleApp2BLL.Services
                 }
                 orderEntity.DeliveryDate = order.DeliveryDate;
                 orderEntity.OrderDate = order.OrderDate;
+                orderEntity.CustomerId = order.CustomerId;
                 uow.Complete();
+                orderEntity.Customer = uow.CustomerRepository.GetCustomer(orderEntity.CustomerId);
                 return conv.Convert(orderEntity);
             }
         }

@@ -4,6 +4,7 @@ using System.Text;
 using ConsoleApp2DAL.Entities;
 using ConsoleApp2DAL.Context;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ConsoleApp2DAL.Repositories
 {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.8
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp2UI", "ConsoleApp2UI\ConsoleApp2UI.csproj", "{AC0FC439-0F89-48A3-9985-926B20C74607}"
 EndProject
@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp2BLL", "ConsoleAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp2DAL", "ConsoleApp2DAL\ConsoleApp2DAL.csproj", "{ABE15F6E-479A-4190-B50C-93D6AEE1D152}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerRestAPI", "CustomerRestAPI\CustomerRestAPI.csproj", "{EE0FAE0D-B697-4D0F-A7C5-8DF9EFE16638}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerRestAPI", "CustomerRestAPI\CustomerRestAPI.csproj", "{EE0FAE0D-B697-4D0F-A7C5-8DF9EFE16638}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

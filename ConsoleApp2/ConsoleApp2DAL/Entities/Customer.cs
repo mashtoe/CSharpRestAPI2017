@@ -10,6 +10,7 @@ namespace ConsoleApp2DAL.Entities
         public string Lastname { get; set; }
         public int Id { get; set; }
         public string Address { get; set; }
+        public List<Order> orders { get; set; }
 
         public Customer()
         {
