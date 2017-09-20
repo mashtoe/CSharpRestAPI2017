@@ -13,11 +13,14 @@ namespace ConsoleApp2BLL.BusinessObjects
         public string Name { get; set; }
         public string Lastname { get; set; }
         public int Id { get; set; }
-        public string Address { get; set; }
         public string FullName
         {
             get { return $"{Name} {Lastname}"; }
         }
+
+        public List<int> AddressIds { get; set; }
+        public List<AddressBO> Addresses { get; set; }
+
 
         public CustomerBO()
         {

@@ -34,22 +34,50 @@ namespace CustomerRestAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                /*
                 var facade = new BLLFacade();
+
+                var address = facade.AddressService.Create(
+                    new AddressBO()
+                    { 
+                        City = "Kolding",
+                        Street = "SesamStrasse",
+                        Number = "22A"
+                    });
+
+                var address2 = facade.AddressService.Create(
+                    new AddressBO()
+                    {
+                        City = "BingoCity",
+                        Street = "DingoDoiok",
+                        Number = "2e2"
+                    });
+                var address3 = facade.AddressService.Create(
+                    new AddressBO()
+                    {
+                        City = "Hurly Smurf",
+                        Street = "Trainstiik",
+                        Number = "44D"
+                    });
+
                 var cust = facade.CustomerService.Create(
                     new CustomerBO()
                     {
-                        Name = "Casper",
+                        Name = "Andreas",
                         Lastname = "Roedgaard",
-                        Address = "Home"
+                        AddressIds = new List<int>() { address.Id, address3.Id }
                     });
                 facade.CustomerService.Create(
                     new CustomerBO()
                     {
                         Name = "Ole",
                         Lastname = "Eriksen",
-                        Address = "Somewhere"
+                        AddressIds = new List<int>() { address.Id, address2.Id },
+                        
+                        
+
                     });
-                for (int i = 0; i < 10000; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     facade.OrderService.Create(
                         new OrderBO()
@@ -59,7 +87,7 @@ namespace CustomerRestAPI
                             CustomerId = cust.Id
                         });
                 }
-                
+                */
                     
             }
 

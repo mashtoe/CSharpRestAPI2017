@@ -20,8 +20,7 @@ namespace ConsoleApp2DAL.Repositories
             {
                 Id = Id++,
                 Name = cust.Name,
-                Lastname = cust.Lastname,
-                Address = cust.Address
+                Lastname = cust.Lastname
             });
 
             return newCust;

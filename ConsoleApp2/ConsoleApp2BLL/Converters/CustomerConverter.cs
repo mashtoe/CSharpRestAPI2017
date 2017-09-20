@@ -2,12 +2,20 @@
 using ConsoleApp2DAL.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ConsoleApp2BLL.Converters
 {
     class CustomerConverter
     {
+        private AddressConverter aConv;
+
+        public CustomerConverter()
+        {
+            aConv = new AddressConverter();
+        }
+
         internal Customer Convert(CustomerBO cust)
         {
             if (cust == null)
@@ -17,7 +25,12 @@ namespace ConsoleApp2BLL.Converters
             return new Customer()
             {
                 Id = cust.Id,
-                Address = cust.Address,
+
+                Addresses = cust.AddressIds?.Select(aId => new CustomerAddress()
+                {
+                    AddressId = aId,
+                    CustomerId = cust.Id
+                }).ToList(),
                 Name = cust.Name,
                 Lastname = cust.Lastname
             };
@@ -32,7 +45,7 @@ namespace ConsoleApp2BLL.Converters
             return new CustomerBO()
             {
                 Id = cust.Id,
-                Address = cust.Address,
+                AddressIds = cust.Addresses?.Select(a => a.AddressId).ToList(),
                 Name = cust.Name,
                 Lastname = cust.Lastname
             };

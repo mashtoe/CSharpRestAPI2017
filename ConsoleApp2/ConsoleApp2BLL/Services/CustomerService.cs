@@ -13,6 +13,7 @@ namespace ConsoleApp2BLL.Services
     {
         DALFacade facade;
         CustomerConverter conv = new CustomerConverter();
+        AddressConverter aConv = new AddressConverter();
 
         public CustomerService(DALFacade facade)
         {
@@ -64,11 +65,20 @@ namespace ConsoleApp2BLL.Services
             }
         }
 
-        public CustomerBO GetCustomer(int id)
+        public CustomerBO GetCustomer(int Id)
         {
             using (var uow = facade.UnitOfWork)
             {
-                return conv.Convert(uow.CustomerRepository.GetCustomer(id));
+                var cust = conv.Convert(uow.CustomerRepository.GetCustomer(Id));
+                /*
+                cust.Addresses = cust.AddressIds?
+                    .Select(id => aConv.Convert(uow.AddressRepository.Get(id)))
+                    .ToList();*/
+
+                cust.Addresses = uow.AddressRepository.GetAllById(cust.AddressIds)
+                    .Select(a => aConv.Convert(a))
+                    .ToList();
+                return cust;
             }
         }
 
@@ -81,10 +91,25 @@ namespace ConsoleApp2BLL.Services
                 {
                     throw new InvalidOperationException("Customer not found");
                 }
-                customerFromDb.Name = cust.Name;
-                customerFromDb.Lastname = cust.Lastname;
-                customerFromDb.Address = cust.Address;
-                uow.Complete();
+                var customerUpdated = conv.Convert(cust);
+                customerFromDb.Name = customerUpdated.Name;
+                customerFromDb.Lastname = customerUpdated.Lastname;
+                customerFromDb.Addresses.RemoveAll(
+                    ca => !customerUpdated.Addresses.Exists(
+                    a => a.AddressId == ca.AddressId &&
+                    a.CustomerId == ca.CustomerId));
+
+                customerUpdated.Addresses.RemoveAll(
+                    ca => customerFromDb.Addresses.Exists(
+                        a => a.AddressId == ca.AddressId &&
+                    a.CustomerId == ca.CustomerId));
+
+
+                customerFromDb.Addresses.AddRange(
+                    customerUpdated.Addresses
+                    );
+
+                uow.Complete(); 
                 return conv.Convert(customerFromDb);
             }
         }

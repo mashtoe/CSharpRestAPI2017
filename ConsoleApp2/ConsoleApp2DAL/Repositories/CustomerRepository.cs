@@ -5,14 +5,15 @@ using ConsoleApp2DAL.Context;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq;
 using ConsoleApp2DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace ConsoleApp2DAL.Repositories
 {
-    public class CustomerRepositoryEFMemory : ICustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
         CustomerAppContext context;
 
-        public CustomerRepositoryEFMemory(CustomerAppContext context)
+        public CustomerRepository(CustomerAppContext context)
         {
             this.context = context;
         }
@@ -32,12 +33,14 @@ namespace ConsoleApp2DAL.Repositories
 
         public List<Customer> GetAll()
         {
-            return context.Customers.ToList();
+            return context.Customers
+                .Include(c => c.Addresses)
+                .ToList();
         }
 
         public Customer GetCustomer(int id)
         {
-            return context.Customers.FirstOrDefault(x => x.Id == id);
+            return context.Customers.Include(c => c.Addresses).FirstOrDefault(x => x.Id == id);
         }
     }
 }
